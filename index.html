@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Landing Page</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="progressBarContainer"><div id="progressBar"></div></div>
+
+  <header class="header">
+    <div class="container nav-container">
+      <div class="logo">
+        <img src="codsoft-logo.png.png" alt="CodSoft Logo" class="logo-img" />
+        <span>CodSoft</span>
+      </div>
+      <nav id="nav">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle" id="menuToggle">&#9776;</div>
+      <button id="toggleDark" class="dark-mode-btn">🌓</button>
+    </div>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="container">
+      <h2 class="hero-title">Build Better Websites</h2>
+      <p class="hero-text">A clean and modern landing page for your product or service. Fully responsive and easy to customize.</p>
+      <a href="#contact" class="btn-primary">Get Started</a>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Our Features</h2>
+      <div class="feature-cards">
+        <div class="card">
+          <h3>Responsive Design</h3>
+          <p>Looks great on all devices — desktop, tablet, or mobile.</p>
+        </div>
+        <div class="card">
+          <h3>Fast Performance</h3>
+          <p>Optimized for speed with minimal code and best practices.</p>
+        </div>
+        <div class="card">
+          <h3>Easy to Customize</h3>
+          <p>Simple structure and clean CSS to suit your style and branding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" id="about">
+    <div class="container">
+      <h2 class="section-title">Our Impact</h2>
+      <div class="stats-grid">
+        <div class="stat"><span id="stat1">0</span><p>Projects</p></div>
+        <div class="stat"><span id="stat2">0</span><p>Clients</p></div>
+        <div class="stat"><span id="stat3">0</span><p>Downloads</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn-primary">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 CodSoft. Crafted with ❤️ | Time: <span id="clock"></span></p>
+    </div>
+  </footer>
+
+  <button id="scrollTopBtn" title="Go to top">↑</button>
+
+  <div id="newsletterModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Subscribe to our Newsletter</h3>
+      <input type="email" placeholder="Enter your email" />
+      <button class="btn-primary">Subscribe</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<script>
+  // Dark mode toggle
+  document.getElementById('toggleDark').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+  });
+
+  // Scroll to top button
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  window.onscroll = function() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      scrollTopBtn.style.display = 'block';
+    } else {
+      scrollTopBtn.style.display = 'none';
+    }
+  };
+  scrollTopBtn.onclick = function() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
+
+  // Stats counter
+  const stats = [
+    { id: 'stat1', value: 100, duration: 2000 },
+    { id: 'stat2', value: 50, duration: 2000 },
+    { id: 'stat3', value: 300, duration: 2000 }
+  ];
+  
+  stats.forEach(stat => {
+    let count = 0;
+    const increment = stat.value / (stat.duration / 100);
+    const element = document.getElementById(stat.id);
+    
+    const interval = setInterval(() => {
+      count += increment;
+      if (count >= stat.value) {
+        clearInterval(interval);
+        count = stat.value;
+      }
+      element.textContent = Math.floor(count);
+    }, 100);
+  });
